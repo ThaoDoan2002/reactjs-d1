@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .btn {
+        background-color: gray;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-primary {
+        background-color: blue;
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: rgba(14, 170, 231, 0.694);
+      }
+      .btn-rounded {
+        border-radius: 20px;
+      }
+      .btn-bordered {
+        border: 2px solid;
+        background-color: transparent;
+      }
+      .btn-bordered:hover {
+        background-color: rgba(85, 158, 177, 0.315);
+      }
+
+      button:hover,
+      a:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Tạo component Button nhận props: primary (boolean), rounded (boolean), bordered (boolean), href (string URL),
+      size (="s"|"m"|"l", mặc định "m"). Component trả về <button> nếu không có href, hoặc <a> nếu có href. -->
+    <script type="text/babel">
+      function Button({
+        primary,
+        rounded,
+        bordered,
+        href,
+        size = "m",
+        children,
+        ...passProps
+      }) {
+        const classNames = ["btn"];
+        if (primary) classNames.push("btn-primary");
+        if (rounded) classNames.push("btn-rounded");
+        if (bordered) classNames.push("btn-bordered");
+
+        const Tag = href ? "a" : "button";
+        return (
+          <Tag
+            style={
+              size === "s"
+                ? { padding: "6px 12px", fontSize: "12px" }
+                : size === "m"
+                ? { padding: "10px 16px", fontSize: "14px" }
+                : { padding: "14px 24px", fontSize: "16px" }
+            }
+            href={href}
+            className={classNames.join(" ")}
+            {...passProps}
+          >
+            {children}
+          </Tag>
+        );
+      }
+      const wrapper = (
+        <>
+          <Button size="s">Normal</Button>
+          <Button primary rounded bordered type="submit" size="l">
+            Primary
+          </Button>
+          <Button rounded>Rounded</Button>
+          <Button bordered size="m">Bordered</Button>
+          <Button href="https://google.com" primary target="_blank" size="s">
+            Link
+          </Button>
+        </>
+      );
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      root.render(wrapper);
+    </script>
+  </body>
+</html>
