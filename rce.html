@@ -46,7 +46,7 @@
         },
         {
           name: "Sản phẩm 3",
-          price: 2500000,
+          price: 150000,
         },
       ];
       const wrapper = React.createElement(
@@ -84,7 +84,7 @@
               React.createElement(
                 "li",
                 { key: index },
-                `${p.name} - ${p.price}`
+                `${p.name} - ${p.price.toLocaleString('vi-VN')}đ`
               )
             )
           )
