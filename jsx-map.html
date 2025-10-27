@@ -23,18 +23,18 @@
     <div id="root"></div>
     <script type="text/babel">
       const tasks = [
-        { id: 1, title: "Do homework", isComplete: true },
-        { id: 2, title: "Cooking", isComplete: false },
-        { id: 3, title: "Gym", isComplete: false },
-        { id: 4, title: "Work", isComplete: false },
-        { id: 5, title: "Learn EL", isComplete: false },
+        { id: 1, title: "Do homework", isCompleted: true },
+        { id: 2, title: "Cooking", isCompleted: false },
+        { id: 3, title: "Gym", isCompleted: false },
+        { id: 4, title: "Work", isCompleted: false },
+        { id: 5, title: "Learn EL", isCompleted: false },
       ];
       const wrapper = (
         <ul>
-          {tasks.map((t, index) => (
+          {tasks.map((t) => (
             <li
-              key={index}
-              className={t.isComplete === true ? "task-completed" : ""}
+              key={t.id}
+              className={t.isCompleted ? "task-completed" : ""}
             >
               {t.title}
             </li>
